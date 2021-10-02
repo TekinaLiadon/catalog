@@ -8,7 +8,7 @@
             <el-menu-item :route="{name: 'PlayerDirectory'}" index="playerDirectory">Каталог игроков</el-menu-item>
         </el-submenu>
         <el-menu-item :route="{name: 'Profile'}" index="profile">Профиль</el-menu-item>
-        <el-menu-item :route="{name: 'Login'}" index="login">Логин</el-menu-item>
+        <el-menu-item :route="{name: 'Login'}" index="login" id="login">Логин</el-menu-item>
     </el-menu>
 </template>
 
@@ -24,7 +24,7 @@
 </script>
 
 <style scoped>
-#navbar {
-    margin-bottom: 15px;
-}
+    #navbar {
+        margin-bottom: 15px;
+    }
 </style>
