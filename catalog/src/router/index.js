@@ -7,14 +7,21 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  /*{
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/!* webpackChunkName: "about" *!/ '../views/About.vue')
-  }*/
+  {
+    path: '/group-list',
+    name: 'GroupList',
+    component: () => import('../views/group-directory/GroupList.vue')
+   },
+  {
+    path: '/create-group',
+    name: 'CreateGroup',
+    component: () => import('../views/group-directory/CreateGroup.vue')
+  },
+  {
+    path: '/player-directory',
+    name: 'PlayerDirectory',
+    component: () => import('../views/group-directory/PlayerDirectory.vue')
+  }
 ]
 
 const router = createRouter({

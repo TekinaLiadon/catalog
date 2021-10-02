@@ -1,18 +1,17 @@
 <template>
-  <div>
-    <p>
-      If Element Plus is successfully added to this project, you'll see an
-      <code v-text="'<el-button>'"></code>
-      below
-    </p>
-    <el-button type="primary">el-button</el-button>
+  <div id="app">
+    <Navbar/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-
+import Navbar from "./components/navbar/Navbar";
 export default {
   name: 'App',
+  components: {
+    Navbar,
+  }
 }
 </script>
 

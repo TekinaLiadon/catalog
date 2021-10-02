@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-   111
+   Пока тестовое
   </div>
 </template>
 
@@ -11,3 +11,7 @@ export default {
 
 }
 </script>
+
+<style scoped>
+
+</style>

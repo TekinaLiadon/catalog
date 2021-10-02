@@ -3,7 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import installElementPlus from './plugins/element'
+import components from '@/components/ui'
 
 const app = createApp(App)
+
+components.forEach(component => {
+    app.component(component.name, component)
+})
 installElementPlus(app)
 app.use(store).use(router).mount('#app')
