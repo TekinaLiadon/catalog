@@ -17,7 +17,7 @@
         name: "CardPost",
         props: {
             title: String,
-            id: String,
+            id: Number,
             body: String,
         }
     }
