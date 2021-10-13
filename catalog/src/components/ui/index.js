@@ -4,6 +4,7 @@ import CardInfo from "./CardInfo";
 import Select from "./Select";
 import InputEl from "./InputEl";
 import LinkTextEl from "./LinkTextEl";
+import CardPost from "./CardPost";
 
 export default [
     ButtonEl,
@@ -12,4 +13,5 @@ export default [
     Select,
     InputEl,
     LinkTextEl,
+    CardPost,
 ]

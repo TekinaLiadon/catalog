@@ -1,21 +1,18 @@
 <template>
     <el-row class="row-bg" justify="center">
-        <template v-for="(card, index) in cards" :key="index">
+        <template v-for="post in cards" :key="post.id">
             <el-col :span="5">
-                <CardPost :id="card.id" :title="card.title" :body="card.body"/>
+                <CardPost :post="post"
+                @remove="$emit('remove', post)"/>
             </el-col>
         </template>
     </el-row>
 </template>
 
 <script>
-    import CardPost from "../ui/CardPost";
 
     export default {
         name: "PostList",
-        components: {
-            CardPost,
-        },
         props: {
             cards: {
                 type: Array,

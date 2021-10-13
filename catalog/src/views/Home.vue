@@ -2,8 +2,8 @@
     <el-row class="row-bg" justify="center">
         <el-col :span="20">
             <PostForm @create="createPost"/>
-            <PostList :cards="cards"/>
-
+            <PostList :cards="cards"
+            @remove="removePost"/>
         </el-col>
     </el-row>
 </template>
@@ -32,6 +32,9 @@
         methods: {
             createPost(post) {
                 this.cards.push(post);
+            },
+            removePost(post) {
+                this.cards = this.cards.filter(p => p.id !== post.id)
             }
         },
         mounted() {
