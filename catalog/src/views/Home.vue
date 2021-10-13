@@ -3,7 +3,7 @@
         <el-col :span="20">
             <PostForm @create="createPost"/>
             <PostList :cards="cards"
-            @remove="removePost"/>
+                      @remove="removePost"/>
         </el-col>
     </el-row>
 </template>
@@ -12,6 +12,7 @@
 
     import PostList from "@/components/home/PostList";
     import PostForm from "@/components/home/PostForm";
+    import axios from "axios";
 
     export default {
         name: 'Home',
@@ -21,12 +22,7 @@
         },
         data() {
             return {
-                cards: [
-                    {id: 1, title: 'Название1', body: 'Типикал рыбатекст1'},
-                    {id: 2, title: 'Название2', body: 'Типикал рыбатекст2'},
-                    {id: 3, title: 'Название3', body: 'Типикал рыбатекст3'},
-                ],
-
+                cards: [],
             }
         },
         methods: {
@@ -35,10 +31,18 @@
             },
             removePost(post) {
                 this.cards = this.cards.filter(p => p.id !== post.id)
-            }
+            },
+            async fetchPosts() {
+                try {
+                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+                    this.cards = response.data
+                } catch (e) {
+                    console.log('Error');
+                }
+            },
         },
         mounted() {
-
+            this.fetchPosts();
         },
     }
 </script>
