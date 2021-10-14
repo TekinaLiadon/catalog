@@ -10,6 +10,9 @@
             <el-form-item>
                 <el-button type="primary" @click="createPost">Создать пост</el-button>
             </el-form-item>
+            <el-form-item>
+                <Select :options="sortOptions" v-model="selectedSort" ></Select>
+            </el-form-item>
         </el-form>
     </el-row>
 </template>
@@ -23,7 +26,16 @@
                     title: "",
                     body: "",
                 },
+                sortOptions: [
+                    {value: 'title', label: 'Заголовки'},
+                    {value: 'body', label: 'Описания'},
+                    {value: 'id', label: 'id'},
+                ],
             }
+        },
+        props: {
+            cards: Array,
+            default: () => [],
         },
         methods: {
             createPost() {

@@ -1,5 +1,5 @@
 <template>
-    <el-select v-model="valueV" placeholder="Нажмите для выбора" @change="changeOption">
+    <el-select v-model="modelValue" placeholder="Нажмите для выбора" @change="changeOption">
         <el-option
                 v-for="option in options"
                 :key="option.value"
@@ -14,7 +14,7 @@
         name: "Select",
         data(){
             return {
-                valueV: ''
+                modelValue: ''
             }
         },
         props: {
@@ -25,7 +25,7 @@
         },
         methods: {
             changeOption(event) {
-                this.$emit('update:valueV', event);
+                this.$emit('update:modelValue', event);
             }
         },
     }
