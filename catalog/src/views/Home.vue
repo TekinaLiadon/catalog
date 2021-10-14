@@ -64,12 +64,12 @@
             async fetchPosts() {
                 try {
                     const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-                            params: {
-                                _page: this.page,
-                                _limit: this.limit,
-                            }
+                        params: {
+                            _page: this.page,
+                            _limit: this.limit,
                         }
-                    );
+                    }
+                );
                     this.cards = response.data
                 } catch (e) {
                     console.log('Error');
