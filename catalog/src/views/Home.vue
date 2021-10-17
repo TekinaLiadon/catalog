@@ -34,22 +34,22 @@
                 post: {
                     title: "",
                     body: "",
-                    id: "",
                 },
                 page: 1,
                 limit: 10,
             }
         },
         methods: {
-            createPost() {
-                this.cards.push(this.post);
+            createPost(post) {
+                this.cards.push(post);
             },
             removePost(post) {
                 this.cards = this.cards.filter(p => p.id !== post.id)
             },
             sortPosts(newArr) {
                 this.cards = newArr;
-            }, async fetchPosts() {
+            },
+            async fetchPosts() {
                 try {
                     const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                             params: {
