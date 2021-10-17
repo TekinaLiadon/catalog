@@ -26,7 +26,7 @@
         methods: {
             changeOption(event) {
                 this.$emit('update:modelValue', event);
-            }
+            },
         },
     }
 </script>

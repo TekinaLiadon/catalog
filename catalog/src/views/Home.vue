@@ -2,22 +2,13 @@
     <el-row class="row-bg" justify="center">
         <el-col :span="20">
             <el-row class="row-bg" justify="center">
-                <el-form>
-                    <el-form-item>
-                        <el-input type="text" placeholder="Название" v-model="post.title"></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-input type="text" placeholder="Описание" v-model="post.body"></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="createPost">Создать пост</el-button>
-                    </el-form-item>
-                    <el-form-item>
-                        <Select :options="sortOptions" v-model="selectedSort"></Select>
-                    </el-form-item>
-                </el-form>
+                <PostForm @create="createPost"
+                          :cards="cards"
+                          @postsSort="sortPosts"
+                          v-model="newCards"
+                />
             </el-row>
-            <PostList :cards="postsSort"
+            <PostList :cards="cards"
                       @remove="removePost"/>
         </el-col>
     </el-row>
@@ -27,49 +18,46 @@
 
     import PostList from "@/components/home/PostList";
     import axios from "axios";
+    import PostForm from "../components/home/PostForm";
 
     export default {
         name: 'Home',
         components: {
             PostList,
+            PostForm,
         },
         data() {
             return {
                 cards: [],
+                newCards: [],
                 selectedSort: "",
                 post: {
                     title: "",
                     body: "",
+                    id: "",
                 },
-                sortOptions: [
-                    {value: 'title', label: 'Заголовки'},
-                    {value: 'body', label: 'Описания'},
-                ],
                 page: 1,
                 limit: 10,
             }
         },
         methods: {
             createPost() {
-                this.post.id = Date.now()
                 this.cards.push(this.post);
-                this.post = {
-                    title: '',
-                    body: '',
-                }
             },
             removePost(post) {
                 this.cards = this.cards.filter(p => p.id !== post.id)
             },
-            async fetchPosts() {
+            sortPosts(newArr) {
+                this.cards = newArr;
+            }, async fetchPosts() {
                 try {
                     const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-                        params: {
-                            _page: this.page,
-                            _limit: this.limit,
+                            params: {
+                                _page: this.page,
+                                _limit: this.limit,
+                            }
                         }
-                    }
-                );
+                    );
                     this.cards = response.data
                 } catch (e) {
                     console.log('Error');
@@ -79,11 +67,6 @@
         mounted() {
             this.fetchPosts();
         },
-        computed: {
-            postsSort() {
-                return [...this.cards].sort((postA, postB) => postA[this.selectedSort]?.localeCompare(postB[this.selectedSort]))
-            }
-        }
     }
 </script>
 

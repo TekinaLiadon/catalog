@@ -11,7 +11,7 @@
                 <el-button type="primary" @click="createPost">Создать пост</el-button>
             </el-form-item>
             <el-form-item>
-                <Select :options="sortOptions" v-model="selectedSort" @sort="$emit('update:value' , postsSort)"></Select>
+                <Select :options="sortOptions" v-model="selectedSort" @change="$emit('postsSort' , postsSort)"></Select>
             </el-form-item>
         </el-form>
     </el-row>
@@ -25,6 +25,7 @@
                 post: {
                     title: "",
                     body: "",
+                    id: "",
                 },
                 selectedSort: "",
                 sortOptions: [
@@ -40,17 +41,21 @@
         },
         methods: {
             createPost() {
-                this.post.id = Date.now()
                 this.$emit('create', this.post)
                 this.post = {
                     title: '',
                     body: '',
+                    id: '',
                 }
             },
         },
         computed: {
             postsSort() {
-                return [...this.cards].sort( (postA, postB) => postA[this.selectedSort]?.localeCompare(postB[this.selectedSort]))
+                if (this.selectedSort == 'id') {
+                    return [...this.cards].sort((postA, postB) => postA[this.selectedSort] - postB[this.selectedSort])
+                } else {
+                    return [...this.cards].sort((postA, postB) => postA[this.selectedSort]?.localeCompare(postB[this.selectedSort]))
+                }
             }
         }
     }
