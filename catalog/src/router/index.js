@@ -8,6 +8,11 @@ const routes = [
     component: Home
   },
   {
+    path: '/:id',
+    name: 'CardPost',
+    component: () => import('@/components/home/PostSolo.vue')
+  },
+  {
     path: '/group-list',
     name: 'GroupList',
     component: () => import('../views/group-directory/GroupList.vue')

@@ -5,7 +5,12 @@
                 <span>{{post.title}}</span>
                 {{post.id}}
                 <el-button type="primary"
-                           @click="$emit('remove', post)">Удалить
+                           @click="$emit('remove', post)">
+                    Удалить
+                </el-button>
+                <el-button type="primary"
+                           @click="this.$router.push({ name: 'CardPost', params: { id: post.id } })">
+                    Перейти
                 </el-button>
             </div>
         </template>
