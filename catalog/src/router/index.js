@@ -37,6 +37,11 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login')
  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: () => import('../views/Test')
+  },
 ]
 
 const router = createRouter({

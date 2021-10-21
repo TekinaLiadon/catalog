@@ -9,6 +9,7 @@
         </el-submenu>
         <el-menu-item :route="{name: 'Profile'}" index="profile">Профиль</el-menu-item>
         <el-menu-item :route="{name: 'Login'}" index="login" id="login">Логин</el-menu-item>
+        <el-menu-item :route="{name: 'Test'}" index="test">Тест</el-menu-item>
     </el-menu>
 </template>
 

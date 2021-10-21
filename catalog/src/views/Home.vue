@@ -32,6 +32,7 @@
     import PostList from "@/components/home/PostList";
     import axios from "axios";
     import PostForm from "../components/home/PostForm";
+    import testMixin from "../components/mixins/testMixin";
 
     export default {
         name: 'Home',
@@ -89,7 +90,8 @@
             page() {
                 this.fetchPosts()
             }
-        }
+        },
+        mixins: [testMixin]
     }
 </script>
 
