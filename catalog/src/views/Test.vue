@@ -1,5 +1,5 @@
 <template>
-    Для тестирования
+    Для тестирования {{$store.state.post.limit}}
 </template>
 
 <script>

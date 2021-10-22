@@ -3,11 +3,13 @@
         <template #header>
             <div class="card-header">
                 <span>{{post.title}}</span>
-                {{post.id}}
+                <br>{{post.id}}
+                <br>
                 <el-button type="primary"
                            @click="$emit('remove', post)">
                     Удалить
                 </el-button>
+                <br>
                 <el-button type="primary"
                            @click="this.$router.push({ name: 'CardPost', params: { id: post.id } })">
                     Перейти
