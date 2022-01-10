@@ -1,10 +1,10 @@
 <template>
-    232
+  h
 </template>
 
 <script>
     export default {
-        name: "Login"
+        name: "Login",
     }
 </script>
 
