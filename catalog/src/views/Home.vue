@@ -1,4 +1,5 @@
 <template>
+  <div class="container">
     <el-row class="row-bg" justify="center">
         <el-col :span="20">
             <el-row class="row-bg" justify="center">
@@ -14,17 +15,18 @@
                           @remove="removePost"/>
             </el-row>
             <el-row class="row-bg" justify="center">
-                <div v-for="pageNumber in totalPages"
-                     :key="pageNumber"
-                     class="page"
-                     :class="{'currentPage': page === pageNumber}"
-                     @click="changePage(pageNumber)"
-                >
-                    {{pageNumber}}
-                </div>
+              <ul class="pagination"
+                  v-for="pageNumber in totalPages"
+                  :key="pageNumber"
+                  :class="{'currentPage': page === pageNumber}"
+                  @click="changePage(pageNumber)"
+              >
+                      <li class="page-item"><span class="page-link">{{pageNumber}}</span></li>
+              </ul>
             </el-row>
         </el-col>
     </el-row>
+  </div>
 </template>
 
 <script>

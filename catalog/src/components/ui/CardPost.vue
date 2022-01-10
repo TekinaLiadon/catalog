@@ -1,25 +1,30 @@
 <template>
-    <el-card class="box-card">
-        <template #header>
-            <div class="card-header">
-                <span>{{post.title}}</span>
-                <br>{{post.id}}
-                <br>
-                <el-button type="primary"
-                           @click="$emit('remove', post)">
-                    Удалить
-                </el-button>
-                <br>
-                <el-button type="primary"
-                           @click="this.$router.push({ name: 'CardPost', params: { id: post.id } })">
-                    Перейти
-                </el-button>
-            </div>
-        </template>
+  <div class="card box-card" style="width: 18rem;">
+    <div class="card-header">
+      {{post.title}}
+      <br>{{post.id}}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <button type="button" class="btn btn-primary"
+                                              @click="$emit('remove', post)">
+        Удалить
+      </button>
+      </li>
+      <li class="list-group-item">
+        <button type="button" class="btn btn-primary"
+                   @click="this.$router.push({ name: 'CardPost', params: { id: post.id } })">
+          Перейти
+        </button>
+      </li>
+      <li class="list-group-item">
         <div class="text item">
-            {{post.body}}
+          {{post.body}}
         </div>
-    </el-card>
+      </li>
+    </ul>
+  </div>
+
 </template>
 
 <script>

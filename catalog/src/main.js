@@ -6,6 +6,8 @@ import installElementPlus from './plugins/element'
 import components from '@/components/ui'
 import directives from "@/components/directives";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 
 const app = createApp(App)
 

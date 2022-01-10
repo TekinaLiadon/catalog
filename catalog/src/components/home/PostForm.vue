@@ -1,20 +1,20 @@
 <template>
-    <el-row class="row-bg" justify="center">
-        <el-form>
-            <el-form-item>
-                <el-input type="text" placeholder="Название" v-model="post.title"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-input type="text" placeholder="Описание" v-model="post.body"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="createPost">Создать пост</el-button>
-            </el-form-item>
-            <el-form-item>
-                <Select :options="sortOptions" v-model="selectedSort" @change="$emit('postsSort' , postsSort)"></Select>
-            </el-form-item>
-        </el-form>
-    </el-row>
+  <div class="row justify-content-md-center">
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Название</label>
+        <input class="form-control" aria-describedby="emailHelp" v-model="post.title">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <input class="form-control" v-model="post.body">
+      </div>
+      <button type="submit" class="btn btn-primary" @click="createPost">Создать пост</button>
+      <div class="mb-3">
+      <Select :options="sortOptions" v-model="selectedSort" @change="$emit('postsSort' , postsSort)"></Select>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
