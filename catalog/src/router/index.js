@@ -13,10 +13,15 @@ const routes = [
     component: () => import('@/components/home/PostSolo.vue')
   },
   {
+    path: '/group-list/:id',
+    name: 'GroupSolo',
+    component: () => import('@/components/groups/GroupSolo.vue')
+   },
+  {
     path: '/group-list',
     name: 'GroupList',
     component: () => import('../views/group-directory/GroupList.vue')
-   },
+  },
   {
     path: '/create-group',
     name: 'CreateGroup',

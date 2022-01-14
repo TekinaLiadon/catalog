@@ -6,15 +6,16 @@
     </div>
     <div class="col-10">
       <div class="row">
+        <template v-for="group in groups" :key="group.id">
         <div class="col-4">
-          <GroupPost></GroupPost>
+          <GroupPost
+              :name = 'group.title'
+              :tags = 'group.body'
+              :id = 'group.id'
+          >
+          </GroupPost>
         </div>
-        <div class="col-4">
-          <GroupPost></GroupPost>
-        </div>
-        <div class="col-4">
-          <GroupPost></GroupPost>
-        </div>
+        </template>
       </div>
       <div class="row">
       <ul class="pagination">
@@ -51,6 +52,7 @@ import GroupPost from "../../components/groups/GroupPost";
           ...mapState({
             page: state => state.groups.page,
             totalPages: state => state.groups.totalPages,
+            groups: state => state.groups.groups,
           })
         },
       mounted() {

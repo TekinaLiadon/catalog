@@ -3,7 +3,7 @@ import axios from "axios";
 export const groupsModule = {
     state: {
         groups: [],
-        limit: 10,
+        limit: 9,
         page: 1,
         totalPages: 0,
     },
