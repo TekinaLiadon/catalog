@@ -6,9 +6,31 @@ export const groupsModule = {
         limit: 9,
         page: 1,
         totalPages: 0,
+        selectedSort: '',
+        options: [
+            {
+                value: 'title',
+                label: 'Новое',
+            },
+            {
+                value: 'body',
+                label: 'Рейтинг',
+            },
+            {
+                value: 'id',
+                label: 'Что-то еще',
+            },
+        ],
     },
     getters: {
-
+        groupsSort(state) {
+            console.log(state.selectedSort)
+            if (state.selectedSort === 'id') {
+                return [...state.groups].sort((postA, postB) => postA[state.selectedSort] - postB[state.selectedSort])
+            } else {
+                return [...state.groups].sort((postA, postB) => postA[state.selectedSort]?.localeCompare(postB[state.selectedSort]))
+            }
+        }
     },
     mutations: {
         setGroups (state, groups) {
@@ -23,6 +45,12 @@ export const groupsModule = {
         setTotalPages (state, totalPages) {
             state.totalPages = totalPages;
         },
+        setOptions (state, options) {
+            state.options = options;
+        },
+        setSelectedSort (state, selectedSort) {
+            state.selectedSort = selectedSort;
+        }
     },
     actions: {
         async fetchGroups({state, commit}) {

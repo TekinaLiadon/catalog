@@ -18,7 +18,6 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
 
     export default {
         name: "PostForm",
@@ -51,16 +50,13 @@
             },
         },
         computed: {
-            ...mapGetters({
-                postsSort: 'post/postsSort'
-            }),
-            /*postsSort() {
+            postsSort() {
                 if (this.selectedSort == 'id') {
                     return [...this.cards].sort((postA, postB) => postA[this.selectedSort] - postB[this.selectedSort])
                 } else {
                     return [...this.cards].sort((postA, postB) => postA[this.selectedSort]?.localeCompare(postB[this.selectedSort]))
                 }
-            }*/
+            }
         }
     }
 </script>
