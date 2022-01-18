@@ -6,6 +6,8 @@ export const groupsModule = {
         limit: 9,
         page: 1,
         totalPages: 0,
+        idGroup: 1,
+        groupInfo: {},
         selectedSort: '',
         options: [
             {
@@ -30,7 +32,7 @@ export const groupsModule = {
             } else {
                 return [...state.groups].sort((postA, postB) => postA[state.selectedSort]?.localeCompare(postB[state.selectedSort]))
             }
-        }
+        },
     },
     mutations: {
         setGroups (state, groups) {
@@ -42,6 +44,9 @@ export const groupsModule = {
         setPage (state, page){
             state.page = page;
         },
+        changePage (state, shift){
+            state.page = state.page + shift;
+        },
         setTotalPages (state, totalPages) {
             state.totalPages = totalPages;
         },
@@ -50,7 +55,13 @@ export const groupsModule = {
         },
         setSelectedSort (state, selectedSort) {
             state.selectedSort = selectedSort;
-        }
+        },
+        setGroupInfo (state, groupInfo){
+            state.groupInfo = groupInfo
+        },
+        setIdGroup (state, idGroup){
+            state.idGroup = idGroup
+        },
     },
     actions: {
         async fetchGroups({state, commit}) {
@@ -68,6 +79,20 @@ export const groupsModule = {
                 console.log('Error');
             }
         },
+        async fetchSoloGroup({state, commit}){
+            try {
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                    params: {
+                            id: state.idGroup,
+                        }
+                    }
+                );
+                console.log(response)
+                commit("setGroupInfo", response.data[0])
+            } catch (e) {
+                console.log('Error');
+            }
+        }
     },
     namespaced: true
 }

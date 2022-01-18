@@ -23,10 +23,10 @@
       </form>
     </div>
   <div class="row justify-content-md-center">
-    <div class="col-10">
-      <div class="row">
+    <div class="col-12">
+      <div class="row justify-content-md-center">
         <template v-for="group in groups" :key="group.id">
-        <div class="col-4">
+        <div class="col-3 card-group">
           <GroupPost
               :name = 'group.title'
               :tags = 'group.body'
@@ -38,8 +38,11 @@
       </div>
       <div class="row">
       <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        <li class="page-item"
+            :class="{'disabled': page === 1}"
+            @click="changePage(-1)"
+        >
+          <span class="page-link">Назад</span>
         </li>
         <li class="page-item"
             v-for="pageNumber in totalPages"
@@ -48,8 +51,11 @@
             @click="setPage(pageNumber)"
         >
           <span class="page-link">{{pageNumber}}</span></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
+        <li class="page-item"
+            :class="{'disabled': page === totalPages}"
+            @click="changePage(1)"
+        >
+          <span class="page-link">Вперед</span>
         </li>
       </ul>
     </div>
@@ -73,6 +79,7 @@ import GroupPost from "../../components/groups/GroupPost";
             setPage: 'groups/setPage',
             setOptions: 'groups/setOptions',
             setSelectedSort: 'groups/setSelectedSort',
+            changePage: 'groups/changePage',
           }),
         },
         computed: {
@@ -113,5 +120,8 @@ import GroupPost from "../../components/groups/GroupPost";
 <style scoped>
 .currentPage {
   border: 1px solid greenyellow;
+}
+.card-group{
+  margin: 0.2em;
 }
 </style>

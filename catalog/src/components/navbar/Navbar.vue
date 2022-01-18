@@ -21,15 +21,21 @@
             </ul>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'Login'}" index="login">Логин</router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Test'}" index="test">Тест</router-link>
           </li>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Поиск</button>
+          <button class="btn btn-outline-success" type="submit">
+            <router-link class="nav-link"
+                         :to="{name: 'Login'}"
+                         index="login"
+                         style="padding: 0; color: #198754;"
+            >
+              Логин
+            </router-link>
+          </button>
         </form>
       </div>
     </div>
@@ -48,7 +54,7 @@
 </script>
 
 <style scoped>
-    #navbar {
+    .navbar {
         margin-bottom: 15px;
     }
 </style>
