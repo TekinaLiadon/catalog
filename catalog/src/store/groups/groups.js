@@ -87,7 +87,6 @@ export const groupsModule = {
                         }
                     }
                 );
-                console.log(response)
                 commit("setGroupInfo", response.data[0])
             } catch (e) {
                 console.log('Error');
