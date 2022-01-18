@@ -40,6 +40,12 @@
       <ul class="pagination justify-content-center">
         <li class="page-item"
             :class="{'disabled': page === 1}"
+            @click="changePage(-page + 1)"
+        >
+            <span class="page-link" aria-hidden="true">&laquo;</span>
+        </li>
+        <li class="page-item"
+            :class="{'disabled': page === 1}"
             @click="changePage(-1)"
         >
           <span class="page-link">Назад</span>
@@ -47,7 +53,7 @@
         <li class="page-item"
             v-for="pageNumber in totalPages"
             :key="pageNumber"
-            :class="{'currentPage': page === pageNumber}"
+            :class="{'active': page === pageNumber}"
             @click="setPage(pageNumber)"
         >
           <span class="page-link">{{pageNumber}}</span></li>
@@ -56,6 +62,12 @@
             @click="changePage(1)"
         >
           <span class="page-link">Вперед</span>
+        </li>
+        <li class="page-item"
+            :class="{'disabled': page === totalPages}"
+            @click="changePage(totalPages - page)"
+        >
+            <span class="page-link" aria-hidden="true">&raquo;</span>
         </li>
       </ul>
     </div>
@@ -118,9 +130,6 @@ import GroupPost from "../../components/groups/GroupPost";
 </script>
 
 <style scoped>
-.currentPage {
-  border: 1px solid greenyellow;
-}
 .card-group{
   margin: 0.2em;
 }
