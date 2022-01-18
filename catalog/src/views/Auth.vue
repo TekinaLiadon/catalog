@@ -1,15 +1,37 @@
 <template>
   <div class="container">
-  h
+    <div class="row justify-content-md-center">
+      <div class="col-6">
+        <form>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Почтовый ящик</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Пароль</label>
+          </div>
+          <div class="mb-3 form-check form-css">
+            <input type="checkbox" class="form-check-input">
+            <label class="form-check-label">Запомнить</label>
+          </div>
+          <div class="mb-3 form-css">
+            <button type="submit" class="btn btn-primary">Войти</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "Login",
-    }
+export default {
+  name: "Login",
+}
 </script>
 
 <style scoped>
-
+.form-css {
+  text-align: start;
+}
 </style>
