@@ -4,7 +4,7 @@
       <form>
         <div class="row justify-content-md-center">
           <div class="col-3">
-            <select class="form-select mb-3" v-model="selectSort" @groupsSort="selectSort">
+            <select class="form-select mb-3" v-model="selectSort">
               <option disabled value="">Выбрать фильтр</option>
               <option v-for="option in options"
                       :key="option.value"
@@ -25,8 +25,9 @@
     <div class="row justify-content-md-center">
       <div class="col-12">
         <div class="row justify-content-md-center">
-          <template v-for="group in groups" :key="group.id">
-            <div class="col-3 card-group">
+            <div class="col-3 card-group"
+                 v-for="(group, index) in groupsSort" :key="index"
+            >
               <GroupPost
                   :name='group.title'
                   :tags='group.body'
@@ -34,7 +35,6 @@
               >
               </GroupPost>
             </div>
-          </template>
         </div>
         <div class="row">
           <ul class="pagination justify-content-center">
@@ -111,7 +111,6 @@ export default {
         return this.selectedSort
       },
       set(value) {
-        console.log(this.groupsSort)
         this.setSelectedSort(value)
       }
     }
@@ -123,9 +122,6 @@ export default {
     page() {
       this.fetchGroups()
     },
-    selectedSort() {
-      this.groupsSort()
-    }
   },
 }
 </script>

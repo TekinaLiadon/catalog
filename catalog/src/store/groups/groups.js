@@ -28,9 +28,12 @@ export const groupsModule = {
         groupsSort(state) {
             console.log(state.selectedSort)
             if (state.selectedSort === 'id') {
-                return [...state.groups].sort((postA, postB) => postA[state.selectedSort] - postB[state.selectedSort])
+                return [...state.groups]
+                    .sort((postA, postB) => postA[state.selectedSort] - postB[state.selectedSort])
             } else {
-                return [...state.groups].sort((postA, postB) => postA[state.selectedSort]?.localeCompare(postB[state.selectedSort]))
+                return [...state.groups]
+                    .sort((postA, postB) => postA[state.selectedSort]
+                        ?.localeCompare(postB[state.selectedSort]))
             }
         },
     },

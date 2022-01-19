@@ -4,11 +4,19 @@
       <div class="col-6">
         <form>
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email"
+                   class="form-control"
+                   id="floatingInput"
+                   placeholder="name@example.com"
+                   v-model="email">
             <label for="floatingInput">Почтовый ящик</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password"
+                   class="form-control"
+                   id="floatingPassword"
+                   placeholder="Password"
+                   v-model="password">
             <label for="floatingPassword">Пароль</label>
           </div>
           <div class="mb-3 form-check form-css">
@@ -27,6 +35,12 @@
 <script>
 export default {
   name: "Login",
+  data(){
+    return {
+      email : "",
+      password : ""
+    }
+  },
 }
 </script>
 

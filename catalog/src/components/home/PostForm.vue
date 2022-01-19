@@ -52,9 +52,11 @@
         computed: {
             postsSort() {
                 if (this.selectedSort == 'id') {
-                    return [...this.cards].sort((postA, postB) => postA[this.selectedSort] - postB[this.selectedSort])
+                    return [...this.cards]
+                        .sort((postA, postB) => postA[this.selectedSort] - postB[this.selectedSort])
                 } else {
-                    return [...this.cards].sort((postA, postB) => postA[this.selectedSort]?.localeCompare(postB[this.selectedSort]))
+                    return [...this.cards]
+                        .sort((postA, postB) => postA[this.selectedSort]?.localeCompare(postB[this.selectedSort]))
                 }
             }
         }
