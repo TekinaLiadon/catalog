@@ -1,6 +1,6 @@
 
 
-export const postModule = {
+export const loginModule = {
     state: {
     },
     getters: {
