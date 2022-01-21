@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-6">
-        <form>
+        <form @submit.prevent="login">
           <div class="form-floating mb-3">
             <input type="email"
                    class="form-control"
@@ -39,6 +39,15 @@ export default {
     return {
       email : "",
       password : ""
+    }
+  },
+  methods: {
+    login: function () {
+      let email = this.email
+      let password = this.password
+      this.$store.dispatch('login', { email, password })
+          .then(() => this.$router.push('/'))
+          .catch(err => console.log(err))
     }
   },
 }
