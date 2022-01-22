@@ -48,7 +48,7 @@
             >
               Логин
             </router-link>
-          <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
+          <span v-if="isLoggedIn"> <a @click="logout">Logout</a></span>
         </form>
       </div>
     </div>
