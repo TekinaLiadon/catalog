@@ -10,14 +10,28 @@
             <router-link class="nav-link" :to="{name: 'Profile'}" index="profile">Профиль</router-link>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
               Рейтинги
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><router-link class="dropdown-item" :to="{name: 'GroupList'}" index="groupList">Список групп</router-link></li>
-              <li><router-link class="dropdown-item" :to="{name: 'CreateGroup'}" index="createGroup">Создание новой группы</router-link></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><router-link class="dropdown-item" :to="{name: 'PlayerDirectory'}" index="playerDirectory">Каталог игроков</router-link></li>
+              <li>
+                <router-link class="dropdown-item" :to="{name: 'GroupList'}" index="groupList">Список групп
+                </router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" :to="{name: 'CreateGroup'}" index="createGroup">Создание новой
+                  группы
+                </router-link>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <router-link class="dropdown-item" :to="{name: 'PlayerDirectory'}" index="playerDirectory">Каталог
+                  игроков
+                </router-link>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -27,15 +41,14 @@
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Поиск</button>
-          <button class="btn btn-outline-success" type="submit">
-            <router-link class="nav-link"
+            <router-link class="nav-link btn btn-outline-success"
                          :to="{name: 'Login'}"
                          index="login"
-                         style="padding: 0; color: #198754;"
+                         style="color: #198754;"
             >
               Логин
             </router-link>
-          </button>
+          <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
         </form>
       </div>
     </div>
@@ -43,18 +56,31 @@
 </template>
 
 <script>
-    export default {
-        name: "Navbar",
-        data() {
-            return {
-                activeIndex: 'home',
-            };
-        },
+export default {
+  name: "Navbar",
+  data() {
+    return {
+      activeIndex: 'home',
+    };
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch('logout')
+          .then(() => {
+            this.$router.push('/login')
+          })
     }
+  },
+  computed : {
+    isLoggedIn : function(){
+      return this.$store.getters.isLoggedIn
+    }
+  },
+}
 </script>
 
 <style scoped>
-    .navbar {
-        margin-bottom: 15px;
-    }
+.navbar {
+  margin-bottom: 15px;
+}
 </style>

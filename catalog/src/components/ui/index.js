@@ -5,6 +5,7 @@ import Select from "./Select";
 import InputEl from "./InputEl";
 import LinkTextEl from "./LinkTextEl";
 import CardPost from "./CardPost";
+import Preloader from "./Preloader";
 
 export default [
     ButtonEl,
@@ -14,4 +15,5 @@ export default [
     InputEl,
     LinkTextEl,
     CardPost,
+    Preloader,
 ]

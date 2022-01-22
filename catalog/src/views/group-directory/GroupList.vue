@@ -23,7 +23,14 @@
       </form>
     </div>
     <div class="row justify-content-md-center">
-      <div class="col-12">
+      <div class="col-12"
+      v-if="groups.length == 0"
+      >
+        <Preloader/>
+      </div>
+      <div class="col-12"
+      v-else
+      >
         <div class="row justify-content-md-center">
             <div class="col-3 card-group"
                  v-for="(group, index) in groupsSort" :key="index"
@@ -79,10 +86,11 @@
 <script>
 import {mapActions, mapState, mapMutations, mapGetters} from 'vuex'
 import GroupPost from "../../components/groups/GroupPost";
+import Preloader from "../../components/ui/Preloader";
 
 export default {
   name: "GroupList",
-  components: {GroupPost},
+  components: {Preloader, GroupPost},
   methods: {
     ...mapActions({
       fetchGroups: 'groups/fetchGroups',
