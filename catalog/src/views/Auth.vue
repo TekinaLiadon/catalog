@@ -29,12 +29,20 @@
         </form>
       </div>
     </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-6">
+        <Registration/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Registration from "../components/authorization/Registration";
 export default {
   name: "Login",
+  components: {Registration},
   data(){
     return {
       email : "",
