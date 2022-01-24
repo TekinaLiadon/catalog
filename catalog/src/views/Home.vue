@@ -12,14 +12,16 @@
           />
           </div>
         </div>
-        <div class="row justify-content-md-center">
-          <div class="col-12"
-               v-if="cards.length == 0"
-          >
+        <div class="row justify-content-md-center"
+             v-if="cards.length == 0"
+        >
+          <div class="col-12">
             <Preloader/>
           </div>
         </div>
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center"
+        v-else
+        >
           <PostList :cards="cards"
                     @remove="removePost"/>
         </div>
