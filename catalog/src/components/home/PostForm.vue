@@ -11,7 +11,19 @@
       </div>
       <button type="submit" class="btn btn-primary" @click="createPost">Создать пост</button>
       <div class="mb-3">
-      <Select :options="sortOptions" v-model="selectedSort" @change="$emit('postsSort' , postsSort)"></Select>
+        <select
+            class="form-select mb-3"
+            v-model="selectedSort"
+            @change="$emit('postsSort' , postsSort)"
+        >
+          <option disabled value="">Выбрать фильтр</option>
+          <option
+              v-for="option in sortOptions"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value">
+          </option>
+        </select>
       </div>
     </form>
   </div>

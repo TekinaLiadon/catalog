@@ -1,5 +1,5 @@
 <template>
-  <div class="card box-card" style="width: 18rem;">
+  <div class="card box-card">
     <div class="card-header">
       {{post.title}}
       <br>{{post.id}}

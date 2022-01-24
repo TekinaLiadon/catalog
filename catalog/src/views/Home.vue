@@ -1,38 +1,67 @@
 <template>
   <div class="container">
-    <el-row class="row-bg" justify="center">
-      <el-col :span="20">
-        <el-row class="row-bg" justify="center">
+    <div class="row justify-content-md-center">
+      <div class="col-12">
+        <div class="row justify-content-md-center">
+          <div class="col-6">
           <PostForm @create="createPost"
                     :cards="cards"
                     @postsSort="sortPosts"
                     v-model="newCards"
                     v-tracking
           />
-        </el-row>
-        <div class="row justify-content-md-center">
-          <div class="col-12"
-               v-if="cards.length == 0"
-          >
+          </div>
+        </div>
+        <div class="row justify-content-md-center"
+             v-if="cards.length == 0"
+        >
+          <div class="col-12">
             <Preloader/>
           </div>
         </div>
-        <el-row class="row-bg" justify="center">
+        <div class="row justify-content-md-center"
+        v-else
+        >
           <PostList :cards="cards"
                     @remove="removePost"/>
-        </el-row>
-        <el-row class="row-bg" justify="center">
-          <ul class="pagination"
-              v-for="pageNumber in totalPages"
-              :key="pageNumber"
-              :class="{'currentPage': page === pageNumber}"
-              @click="changePage(pageNumber)"
-          >
-            <li class="page-item"><span class="page-link">{{ pageNumber }}</span></li>
+        </div>
+        <div class="row justify-content-md-center">
+          <ul class="pagination justify-content-center">
+            <li class="page-item"
+                :class="{'disabled': page === 1}"
+                @click="changePage(1)"
+            >
+              <span class="page-link" aria-hidden="true">&laquo;</span>
+            </li>
+            <li class="page-item"
+                :class="{'disabled': page === 1}"
+                @click="changePage(page,-1)"
+            >
+              <span class="page-link">Назад</span>
+            </li>
+            <li class="page-item"
+                v-for="pageNumber in totalPages"
+                :key="pageNumber"
+                :class="{'active': page === pageNumber}"
+                @click="changePage(pageNumber)"
+            >
+              <span class="page-link">{{ pageNumber }}</span></li>
+            <li class="page-item"
+                :class="{'disabled': page === totalPages}"
+                @click="changePage(page, 1)"
+            >
+              <span class="page-link">Вперед</span>
+            </li>
+            <li class="page-item"
+                :class="{'disabled': page === totalPages}"
+                @click="changePage(totalPages)"
+            >
+              <span class="page-link" aria-hidden="true">&raquo;</span>
+            </li>
           </ul>
-        </el-row>
-      </el-col>
-    </el-row>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -73,8 +102,8 @@ export default {
     sortPosts(newArr) {
       this.cards = newArr;
     },
-    changePage(pageNumber) {
-      this.page = pageNumber
+    changePage(pageNumber, shift = 0) {
+      this.page = pageNumber + shift
     },
     async fetchPosts() {
       try {
