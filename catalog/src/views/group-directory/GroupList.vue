@@ -24,12 +24,12 @@
     </div>
     <div class="row justify-content-md-center">
       <div class="col-12"
-      v-if="groups.length == 0"
+           v-if="groups.length == 0"
       >
         <Preloader/>
       </div>
       <div class="col-12"
-      v-else
+           v-else
       >
         <div class="row justify-content-md-center">
           <div class="card-group">
@@ -43,7 +43,7 @@
               >
               </GroupPost>
             </div>
-        </div>
+          </div>
         </div>
         <div class="row">
           <ul class="pagination justify-content-center">

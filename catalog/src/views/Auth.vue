@@ -17,7 +17,7 @@
           </button>
           <button type="button"
                   class="btn btn-primary"
-                  @click="auth_success('testToken', 'testUser')"
+                  @click="auth_success('testToken'), setUser({name: 'testUser'})"
           >
             Тестовый вход
           </button>
@@ -67,6 +67,7 @@ export default {
     },
     ...mapMutations({
       auth_success: 'auth_success',
+      setUser: 'setUser',
     }),
   },
 }
