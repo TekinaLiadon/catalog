@@ -15,6 +15,12 @@
           >
             Регистрация
           </button>
+          <button type="button"
+                  class="btn btn-primary"
+                  @click="auth_success('testToken', 'testUser')"
+          >
+            Тестовый вход
+          </button>
         </div>
       </div>
     </div>
@@ -38,6 +44,7 @@
 <script>
 import Registration from "../components/authorization/Registration";
 import Login from "../components/authorization/Login";
+import {mapState, mapMutations} from 'vuex'
 export default {
   name: "Auth",
   components: {
@@ -49,10 +56,18 @@ export default {
       authType: 'login',
     }
   },
+  computed: {
+    ...mapState({
+      status: state => state.status,
+    })
+  },
   methods: {
     changeType (type) {
       this.authType =  type;
-    }
+    },
+    ...mapMutations({
+      auth_success: 'auth_success',
+    }),
   },
 }
 </script>

@@ -36,6 +36,9 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
+    meta: {
+      requiresAuth: true
+    },
     component: () => import('../views/Profile')
   },
   {

@@ -76,5 +76,7 @@
 </script>
 
 <style scoped>
-
+.btn {
+  margin-bottom: 1em;
+}
 </style>
