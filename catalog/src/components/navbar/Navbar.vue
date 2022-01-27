@@ -45,10 +45,19 @@
                          :to="{name: 'Login'}"
                          index="login"
                          style="color: #198754;"
+                         v-if="!isLoggedIn"
             >
               Логин
             </router-link>
-          <span v-if="isLoggedIn"> <a @click="logout">Logout</a></span>
+          <span v-else>
+            <a
+              class="nav-link btn btn-outline-success"
+              @click="logout"
+              style="color: #198754;"
+          >
+              Выход
+            </a>
+          </span>
         </form>
       </div>
     </div>

@@ -13,7 +13,7 @@ export default createStore({
     state: {
         status: '',
         token: localStorage.getItem('token') || '',
-        user : {}
+        user : {},
     },
     getters: {
         isLoggedIn: state => !!state.token,
@@ -26,10 +26,12 @@ export default createStore({
         auth_error(state){
             state.status = 'error'
         },
-        auth_success(state, token, user){
-            state.status = 'success'
-            state.token = token
-            state.user = user
+        auth_success(state, token){
+            state.status = 'success';
+            state.token = token;
+        },
+        setUser(state, user) {
+            state.user = user;
         },
         logout(state){
             state.status = ''
@@ -46,7 +48,8 @@ export default createStore({
                         const user = resp.data.user
                         localStorage.setItem('token', token)
                         axios.defaults.headers.common['Authorization'] = token
-                        commit('auth_success', token, user)
+                        commit('auth_success', token)
+                        commit('setUser', user)
                         resolve(resp)
                     })
                     .catch(err => {

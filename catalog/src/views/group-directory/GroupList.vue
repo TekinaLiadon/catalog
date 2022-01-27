@@ -24,16 +24,16 @@
     </div>
     <div class="row justify-content-md-center">
       <div class="col-12"
-      v-if="groups.length == 0"
+           v-if="groups.length == 0"
       >
         <Preloader/>
       </div>
       <div class="col-12"
-      v-else
+           v-else
       >
-        <div class="row justify-content-md-center">
-            <div class="col-3 card-group"
-                 v-for="(group, index) in groupsSort" :key="index"
+        <div class="row row justify-content-md-center row-cols-1 row-cols-md-3 g-4">
+            <div class="col"
+                 v-for="group in groupsSort" :key="group.id"
             >
               <GroupPost
                   :name='group.title'
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style scoped>
-.card-group {
-  margin: 0.2em;
+.pagination {
+  margin: 1em;
 }
 </style>
