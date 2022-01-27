@@ -1,5 +1,4 @@
 <template>
-  ммвы
   {{$route.path}}
   <Chits
   :pagesInfo="pagesInfo"/>
@@ -13,10 +12,6 @@ export default {
   data() {
     return {
       pagesInfo: [
-        {
-          name: 'Главная',
-          urlName: 'Home',
-        },
         {
           name: 'Главная',
           urlName: 'Home',
