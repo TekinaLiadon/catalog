@@ -4,9 +4,12 @@ import Home from '../views/Home.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      name: 'Главная'
+    },
   },
   {
     path: '/:id',
