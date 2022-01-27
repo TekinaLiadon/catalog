@@ -31,10 +31,9 @@
       <div class="col-12"
            v-else
       >
-        <div class="row justify-content-md-center">
-          <div class="card-group">
-            <div class="col-4"
-                 v-for="(group, index) in groupsSort" :key="index"
+        <div class="row row justify-content-md-center row-cols-1 row-cols-md-3 g-4">
+            <div class="col"
+                 v-for="group in groupsSort" :key="group.id"
             >
               <GroupPost
                   :name='group.title'
@@ -43,7 +42,6 @@
               >
               </GroupPost>
             </div>
-          </div>
         </div>
         <div class="row">
           <ul class="pagination justify-content-center">
@@ -137,7 +135,7 @@ export default {
 </script>
 
 <style scoped>
-.card-group {
-  margin: 0.2em;
+.pagination {
+  margin: 1em;
 }
 </style>

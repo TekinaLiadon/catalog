@@ -10,54 +10,45 @@
           <div class="card-body">
             <img src="../data/img/Shel.jpg" class="img-fluid avatar" alt="...">
             <h5 class="card-title">Пользователь: {{ this.$store.state.user.name }}</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
-            <p class="card-text">Last updated 3 mins ago</p>
+            <p class="card-text">Первый абзац и Ы</p>
+            <p class="card-text">Второй абзац</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <UserPosts/>
-      </div>
+  <div class="row">
+    <div class="col-12"
+         v-if="posts.length == 0"
+    >
+      <Preloader/>
     </div>
-    <div class="row">
-      <div class="col-12"
-           v-if="posts.length == 0"
+    <div class="row justify-content-md-center row-cols-1 row-cols-md-3 g-4" v-else>
+      <div class="col"
+           v-for="post in posts" :key="post.id"
       >
-        <Preloader/>
-      </div>
-      <div class="card-group" v-else>
-        <div class="col-4"
-             v-for="post in posts" :key="post.id"
-        >
-          <GroupPost
-              :name='post.title'
-              :tags='post.body'
-              :id='post.id'
-          >
-          </GroupPost>
-          <Preloader v-if="this.status == 'loading'"/>
-        </div>
+        <UserPosts
+            :title='post.title'
+            :body='post.body'
+            :id='post.id'
+        />
+        <Preloader v-if="this.status == 'loading'"/>
       </div>
     </div>
-    <div ref="observer" class="observer"></div>
+  </div>
+  <div ref="observer" class="observer"></div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import GroupPost from "../components/groups/GroupPost";
 import UserPosts from "../components/profile/UserPosts";
 
 export default {
   name: "Profile",
   components: {
     UserPosts,
-    GroupPost,
   },
-  data(){
+  data() {
     return {
       page: 0,
       limit: 9,
@@ -88,38 +79,40 @@ export default {
   },
   mounted() {
     this.addPosts()
-      const options = {
-        rootMargin: '0px',
-        threshold: 1.0
+    const options = {
+      rootMargin: '0px',
+      threshold: 1.0
+    }
+    const callback = (entries) => {
+      if (entries[0].isIntersecting && this.page < this.totalPages) {
+        this.addPosts()
       }
-      const callback = (entries) => {
-        if(entries[0].isIntersecting && this.page < this.totalPages){
-          this.addPosts()
-        }
-      };
-      const observer = new IntersectionObserver(callback, options);
-      observer.observe(this.$refs.observer)
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer)
   },
 }
 </script>
 
 <style scoped>
-.card-img{
+.card-img {
   object-fit: cover;
   width: 100%;
   height: 300px;
   overflow: hidden;
 }
-.avatar{
+
+.avatar {
   width: 200px;
   height: 200px;
   object-fit: cover;
-  float:left;
+  float: left;
   margin: -10% 10px 10px 0;
   border-radius: 100px;
   border: 3px solid black;
   box-shadow: 0 0 7px #666;
 }
+
 .card-body {
   text-align: start;
 }
