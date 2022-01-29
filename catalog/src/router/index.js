@@ -8,13 +8,13 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      name: 'Главная'
+      title: 'Главная'
     },
   },
   {
-    path: '/:id',
-    name: 'CardPost',
-    component: () => import('@/components/home/PostSolo.vue')
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () => import('@/components/error/NotFound404'),
   },
   {
     path: '/group-list/:id',
@@ -56,6 +56,12 @@ const routes = [
       requiresAuth: true
     },
     component: () => import('../views/Test')
+  },
+
+  {
+    path: '/test/:id',
+    name: 'CardPost',
+    component: () => import('@/components/home/PostSolo.vue')
   },
 ]
 
