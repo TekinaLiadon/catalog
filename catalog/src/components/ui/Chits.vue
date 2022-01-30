@@ -1,6 +1,5 @@
 <template>
-  <button @click="pow('/home/test/mem', 1 , acc)">fff</button>
-  <button @click="separationUrl('/home/test/mem', pathInfo)">fff</button>
+  <button @click="separationUrl('/home/test/mem')">fff</button>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"
@@ -8,9 +7,9 @@
           :key="pageInfo.name"
           :class="{'active': pageInfo.active === true}"
       >
-        <router-link :to="{name: pageInfo.urlName}"
+        <router-link :to="{name: pageInfo.name}"
                      v-if="pageInfo.active !== true">
-          {{ pageInfo.name }}
+          {{ pageInfo.meta.title }}
         </router-link>
         <span v-else>
           {{ pageInfo.name }}
@@ -25,20 +24,16 @@ export default {
   name: "Chits",
   data() {
     return {
-      acc: [],
       pathInfo: [],
     }
   },
   props: {
-    pagesInfo: {
-      type: Array,
-    },
     path: {
       type: String,
     },
   },
   methods: {
-    pow(str, n, acc = []) {
+    /*pow(str, n, acc = []) {
       let foundPos = str.indexOf("/", n);
       console.log(str)
       if (acc === []) {
@@ -54,7 +49,7 @@ export default {
         }
         this.pow(str, foundPos + 1, acc);
       }
-    },
+    },*/
     separationUrl(str) {
       let numberPos = 1;
       for (let i = 0; i < 5; i++) {
@@ -71,6 +66,7 @@ export default {
           )
         }
       }
+      return this.pathInfo
     },
   },
   mounted() {

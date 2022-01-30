@@ -10,7 +10,7 @@
       >
       <label for="floatingInput">Почтовый ящик</label>
     </div>
-    <div class="form-floating mb-3">
+    <div class="form-floating mb-3" id="password">
       <input type="password"
              class="form-control"
              id="floatingPassword"

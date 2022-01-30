@@ -24,11 +24,17 @@ const routes = [
   {
     path: '/group-list',
     name: 'GroupList',
+    meta: {
+      title: 'Список групп'
+    },
     component: () => import('../views/group-directory/GroupList.vue')
   },
   {
     path: '/create-group',
     name: 'CreateGroup',
+    meta: {
+      title: 'Создание группы'
+    },
     component: () => import('../views/group-directory/CreateGroup.vue')
   },
   {
@@ -40,20 +46,25 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      title: 'Профиль'
     },
     component: () => import('../views/Profile')
   },
   {
     path: '/login',
     name: 'Login',
+    meta: {
+      title: 'Авторизация'
+    },
     component: () => import('../views/Auth')
  },
   {
     path: '/test',
     name: 'Test',
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      title: 'Тест'
     },
     component: () => import('../views/Test')
   },
