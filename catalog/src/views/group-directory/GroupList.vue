@@ -44,39 +44,12 @@
             </div>
         </div>
         <div class="row">
-          <ul class="pagination justify-content-center">
-            <li class="page-item"
-                :class="{'disabled': page === 1}"
-                @click="changePage(-page + 1)"
-            >
-              <span class="page-link" aria-hidden="true">&laquo;</span>
-            </li>
-            <li class="page-item"
-                :class="{'disabled': page === 1}"
-                @click="changePage(-1)"
-            >
-              <span class="page-link">Назад</span>
-            </li>
-            <li class="page-item"
-                v-for="pageNumber in totalPages"
-                :key="pageNumber"
-                :class="{'active': page === pageNumber}"
-                @click="setPage(pageNumber)"
-            >
-              <span class="page-link">{{ pageNumber }}</span></li>
-            <li class="page-item"
-                :class="{'disabled': page === totalPages}"
-                @click="changePage(1)"
-            >
-              <span class="page-link">Вперед</span>
-            </li>
-            <li class="page-item"
-                :class="{'disabled': page === totalPages}"
-                @click="changePage(totalPages - page)"
-            >
-              <span class="page-link" aria-hidden="true">&raquo;</span>
-            </li>
-          </ul>
+          <Pagination
+              :page="page"
+              :total-pages="totalPages"
+              @changePage="changePage"
+              @setPage="setPage"
+            />
         </div>
       </div>
     </div>
@@ -86,11 +59,10 @@
 <script>
 import {mapActions, mapState, mapMutations, mapGetters} from 'vuex'
 import GroupPost from "../../components/groups/GroupPost";
-import Preloader from "../../components/ui/Preloader";
 
 export default {
   name: "GroupList",
-  components: {Preloader, GroupPost},
+  components: { GroupPost},
   methods: {
     ...mapActions({
       fetchGroups: 'groups/fetchGroups',

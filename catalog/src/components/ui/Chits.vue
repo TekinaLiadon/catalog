@@ -12,7 +12,7 @@
           {{ pageInfo.meta.title }}
         </router-link>
         <span v-else>
-          {{ pageInfo.name }}
+          {{ pageInfo.meta.title }}
         </span>
       </li>
     </ol>
