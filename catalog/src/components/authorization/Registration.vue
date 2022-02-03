@@ -7,7 +7,6 @@
            class="form-control"
            v-model="name"
            required
-           autofocus
     >
     <label for="name">Имя</label>
   </div>
