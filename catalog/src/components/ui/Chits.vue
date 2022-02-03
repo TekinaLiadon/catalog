@@ -1,9 +1,8 @@
 <template>
-  <button @click="separationUrl('/home/test/mem')">fff</button>
-  <nav aria-label="breadcrumb">
+  <nav aria-label="breadcrumb" class="chitsBar">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"
-          v-for="pageInfo in pathInfo"
+          v-for="pageInfo in arrPathInfo"
           :key="pageInfo.name"
           :class="{'active': pageInfo.active === true}"
       >
@@ -50,14 +49,14 @@ export default {
         this.pow(str, foundPos + 1, acc);
       }
     },*/
-    separationUrl(str) {
+    /*separationUrl(str) {
       let numberPos = 1;
       for (let i = 0; i < 5; i++) {
         const foundPos = str.indexOf("/", numberPos);
         if (foundPos !== -1) {
           const currentPath = this.$router.getRoutes().filter(path => path.path == str.slice(numberPos - 1, foundPos))
-          /*console.log(this.pathInfo.concat(currentPath))
-          console.log(str.slice(numberPos - 1, foundPos))*/
+          /!*console.log(this.pathInfo.concat(currentPath))
+          console.log(str.slice(numberPos - 1, foundPos))*!/
           if (currentPath.length !== 0) this.pathInfo = this.pathInfo.concat(currentPath);
           numberPos = foundPos + 1
         } else if (this.pathInfo === []) {
@@ -67,14 +66,51 @@ export default {
         }
       }
       return this.pathInfo
+    },*/
+  },
+  computed: {
+    arrPathInfo() {
+      let numberPos = 1;
+      let acc = [];
+      for (let i = 0; i < 10; i++) {
+        const foundPos = this.path.indexOf("/", numberPos);
+        if (foundPos !== -1) {
+          const currentPath = this.$router.getRoutes().filter(path => path.path == this.path.slice(numberPos - 1, foundPos))
+          if (currentPath.length !== 0) acc = acc.concat(currentPath);
+          numberPos = foundPos + 1
+        } else if (acc.length === 0) {
+          acc = acc.concat(
+              this.$router.getRoutes().filter(path => path.path == this.path)
+          )
+          break
+        }
+        else if (foundPos === -1){
+          const currentPath = this.$router.getRoutes().filter(path => path.path == this.path.slice(numberPos - 1))
+          if (currentPath.length === 0) {
+            const dinamInfo = this.path.slice(0, foundPos) + ':' + Object.keys(this.$route.params).join()
+            const currentPath = this.$router.getRoutes().filter(path => path.path == dinamInfo)
+            currentPath[0] = {
+              meta: {
+                title: this.path.slice(numberPos )
+              },
+              active: true
+            }
+            acc = acc.concat(currentPath)
+          }
+          break
+        }
+      }
+      return acc
     },
   },
   mounted() {
-    this.separationUrl(this.path);
+    /*this.separationUrl(this.path);*/
   },
 }
 </script>
 
 <style scoped>
-
+.chitsBar {
+  margin: 15px;
+}
 </style>

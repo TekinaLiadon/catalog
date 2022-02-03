@@ -55,6 +55,7 @@ export default createStore({
                     .catch(err => {
                         commit('auth_error')
                         localStorage.removeItem('token')
+                        console.log('fgss')
                         reject(err)
                     })
             })

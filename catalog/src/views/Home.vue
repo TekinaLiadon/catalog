@@ -1,7 +1,7 @@
 <template>
-  {{$route.path}}
   <Chits
-  :path="this.$route.path"/>
+  :path="this.$route.path"
+  />
 </template>
 
 <script>
