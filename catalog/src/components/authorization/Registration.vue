@@ -41,7 +41,7 @@
       <label for="password-confirm">Повторить пароль</label>
     </div>
     <div class="mb-3 form-css">
-      <button type="submit" class="btn btn-primary">Регистрация</button>
+      <button type="submit" class="btn btn-primary" @click="$emit('addToast')">Регистрация</button>
     </div>
 </form>
 </template>

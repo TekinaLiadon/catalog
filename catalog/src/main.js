@@ -7,6 +7,7 @@ import directives from "@/components/directives";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
+import "bootstrap/dist/js/bootstrap.bundle.min"
 
 const app = createApp(App)
 

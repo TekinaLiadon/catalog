@@ -1,6 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -9,12 +17,17 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Profile'}" index="profile">Профиль</router-link>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false">
+          <li class="nav-item dropdown" id="groups-dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               role="button"
+               id="navbarDropdownMenuLink"
+               data-bs-target="#navbarSupportedContent"
+               data-bs-toggle="dropdown"
+               aria-expanded="false"
+               aria-controls="navbarDropdownMenuLink">
               Рейтинги
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li>
                 <router-link class="dropdown-item" :to="{name: 'GroupList'}" index="groupList">Список групп
                 </router-link>

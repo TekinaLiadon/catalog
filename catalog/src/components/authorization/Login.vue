@@ -23,26 +23,13 @@
       <label class="form-check-label">Запомнить</label>
     </div>
     <div class="mb-3 form-css">
-      <button type="submit" class="btn btn-primary" @click="addToast" id="liveToastBtn" ref="liveToastBtn">Войти
+      <button type="submit" class="btn btn-primary" @click="$emit('addToast')" id="liveToastBtn" ref="liveToastBtn">Войти
       </button>
     </div>
   </form>
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" ref="liveToast">
-      <div class="toast-header">
-        <strong class="me-auto">Авторизация</strong>
-        <small>11 мин назад</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
-      </div>
-      <div class="toast-body">
-        Попытка войти в профиль неуспешна
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-import {Toast} from 'bootstrap/dist/js/bootstrap.esm.min.js'
 
 export default {
   name: "Login",
@@ -61,12 +48,12 @@ export default {
           .then(() => this.$router.push('/'))
           .catch(err => console.log(err))
     },
-    addToast() {
-      /*const toastTrigger = this.$refs.liveToastBtn*/
+    /*addToast() {
+      /!*const toastTrigger = this.$refs.liveToastBtn*!/
       const toastLiveExample = this.$refs.liveToast
       const toast = new Toast(toastLiveExample)
       toast.show()
-    }
+    }*/
   },
   mounted() {
   },

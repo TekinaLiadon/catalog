@@ -3,7 +3,7 @@
     <div class="row justify-content-md-center">
       <form>
         <div class="row justify-content-md-center">
-          <div class="col-3">
+          <div class="col-4">
             <select class="form-select mb-3" v-model="selectSort">
               <option disabled value="">Выбрать фильтр</option>
               <option v-for="option in options"
@@ -16,7 +16,7 @@
           <div class="col-5">
             <input type="text" class="form-control" placeholder="Теги">
           </div>
-          <div class="col-2">
+          <div class="col-3">
             <button type="submit" class="btn btn-primary">Найти</button>
           </div>
         </div>
@@ -43,7 +43,7 @@
               </GroupPost>
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-md-center">
           <Pagination
               :page="page"
               :total-pages="totalPages"
@@ -107,7 +107,5 @@ export default {
 </script>
 
 <style scoped>
-.pagination {
-  margin: 1em;
-}
+
 </style>

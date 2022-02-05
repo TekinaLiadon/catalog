@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-md-center">
       <div class="col-12">
         <div class="card">
           <img src="../data/img/Shel.jpg" class="card-img" alt="Изображение группы">
