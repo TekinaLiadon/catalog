@@ -24,7 +24,7 @@
                  class="routerPage"
                  v-for="pageNumber in totalPages"
                  :key="pageNumber"
-                 v-show="pageNumber >= (page - 2) && pageNumber <= (page + 2)">
+                 v-show="pageNumber >= (page - 2 || 0 ) && pageNumber <= (page + 2 || 5)">
       <li class="page-item"
           :class="{'active': page === pageNumber}"
           @click="$emit('setPage' , pageNumber)"

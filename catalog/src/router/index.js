@@ -74,6 +74,14 @@ const routes = [
     name: 'CardPost',
     component: () => import('@/components/home/PostSolo.vue')
   },
+  {
+    path: '/map',
+    name: 'Map',
+    meta: {
+      title: 'Карта'
+    },
+    component: () => import('../views/Map')
+  },
 ]
 
 const router = createRouter({

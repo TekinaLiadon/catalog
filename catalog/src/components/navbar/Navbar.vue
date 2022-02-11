@@ -18,18 +18,16 @@
             <router-link class="nav-link" :to="{name: 'Profile'}" index="profile">Профиль</router-link>
           </li>
           <li class="nav-item dropdown" id="groups-dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
+            <a class="nav-link dropdown-toggle" href="#menu-groups"
                role="button"
                id="navbarDropdownMenuLink"
-               data-bs-target="#navbarSupportedContent"
                data-bs-toggle="dropdown"
-               aria-expanded="false"
-               aria-controls="navbarDropdownMenuLink">
+               aria-expanded="false">
               Рейтинги
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="menu-groups">
               <li>
-                <router-link class="dropdown-item" :to="{name: 'GroupList'}" index="groupList">Список групп
+                <router-link class="dropdown-item" :to="{name: 'GroupList' , query: {page: 1}}" index="groupList">Список групп
                 </router-link>
               </li>
               <li>
@@ -49,6 +47,9 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Test'}" index="test">Тест</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{name: 'Map'}" index="map">Карта</router-link>
           </li>
         </ul>
         <form class="d-flex">
