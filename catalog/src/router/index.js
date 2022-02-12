@@ -82,6 +82,14 @@ const routes = [
     },
     component: () => import('../views/Map')
   },
+  {
+    path: '/gif',
+    name: 'Gif',
+    meta: {
+      title: 'Гифки'
+    },
+    component: () => import('../views/project/Gif')
+  },
 ]
 
 const router = createRouter({

@@ -47,6 +47,7 @@
           <Pagination
               :page="page"
               :total-pages="totalPages"
+              :namePath="'GroupList'"
               @changePage="changePage"
               @setPage="setPage"
             />

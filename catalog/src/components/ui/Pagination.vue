@@ -1,7 +1,7 @@
 <template>
   <ul class="pagination justify-content-center"
       :class="{'pagination-sm': windowSize < 600}">
-    <router-link :to="{ path: '/group-list', query: {page: page}}"
+    <router-link :to="{ name: namePath, query: {page: page}}"
                  class="routerPage">
       <li class="page-item"
           :class="{'disabled': page === 1}"
@@ -10,7 +10,7 @@
         <span class="page-link" aria-hidden="true">&laquo;</span>
       </li>
     </router-link>
-    <router-link :to="{ path: '/group-list', query: {page: page}}"
+    <router-link :to="{ name: namePath, query: {page: page}}"
                  class="routerPage">
       <li class="page-item"
           :class="{'disabled': page === 1}"
@@ -20,7 +20,7 @@
       </li>
     </router-link>
     <span class="page-link" v-show="page > 3 ">...</span>
-    <router-link :to="{ path: '/group-list', query: {page: page}}"
+    <router-link :to="{ name: namePath, query: {page: page}}"
                  class="routerPage"
                  v-for="pageNumber in totalPages"
                  :key="pageNumber"
@@ -32,7 +32,7 @@
         <span class="page-link">{{ pageNumber }}</span></li>
     </router-link>
     <span class="page-link" v-show="page < totalPages - 3 ">...</span>
-    <router-link :to="{ path: '/group-list', query: {page: page}}"
+    <router-link :to="{ name: namePath, query: {page: page}}"
                  class="routerPage">
       <li class="page-item"
           :class="{'disabled': page === totalPages}"
@@ -41,7 +41,7 @@
         <span class="page-link">Вперед</span>
       </li>
     </router-link>
-    <router-link :to="{ path: '/group-list', query: {page: page}}"
+    <router-link :to="{ name: namePath, query: {page: page}}"
                  class="routerPage">
       <li class="page-item"
           :class="{'disabled': page === totalPages}"
@@ -67,6 +67,9 @@ export default {
     },
     totalPages: {
       type: Number,
+    },
+    namePath: {
+      type: String,
     },
   },
   methods: {

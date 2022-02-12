@@ -51,6 +51,21 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'Map'}" index="map">Карта</router-link>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               role="button"
+               id="navbarDropdownProject"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+              Рейтинги
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProject" id="menu-project">
+              <li>
+                <router-link class="dropdown-item" :to="{name: 'Gif'}" index="gif">Список групп
+                </router-link>
+              </li>
+            </ul>
+          </li>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
