@@ -1,40 +1,63 @@
 <template>
   <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="row">
-        <div class="col">
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="col">
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
+    <div class="row row-form">
+      <div class="col">
+        <select class="form-select" v-model="url">
+          <option disabled value="">Тип</option>
+          <option value="/search">Поиск</option>
+          <option value="/trending">Популярное</option>
+          <option value="/random">Рандом</option>
+        </select>
+      </div>
+      <div class="col" v-show="url === '/search' || url === '/trending'">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Число гифок"
+                 v-model="limit"
+          >
+      </div>
+      <div class="col" v-show="url === '/search'">
+        <input type="text"
+               class="form-control"
+               placeholder="Поиск (анг)"
+               v-model="q"
+        >
+      </div>
+      <div class="col" v-show="url === '/random'">
+        <input type="text"
+               class="form-control"
+               placeholder="Тег"
+               v-model="tag"
+        >
+      </div>
+      <div class="col">
+        <select class="form-select" v-model="rating">
+          <option disabled value="">Рейтинг</option>
+          <option value="g">G</option>
+          <option value="pg">PG</option>
+          <option value="pg-13">PG-13</option>
+          <option value="r">R</option>
+        </select>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary" @click="sortRequests">Найти</button>
       </div>
     </div>
     <div class="row row justify-content-md-center row-cols-1 row-cols-md-4 g-4">
       <div class="col"
            v-for="gif in data"
            :key="gif.id">
-            <div class="card h-100">
-              <div class="card-img">
-                <img :src="gif.images.downsized_medium.url" class="card-img-top img-gif" alt="...">
-              </div>
-              <div class="card-body">
-                <p class="card-text">{{gif.title}}</p>
-              </div>
-              <div class="card-footer text-muted">
-                {{gif.id}}
-              </div>
+        <div class="card h-100">
+          <div class="card-img">
+            <img :src="gif.images.downsized_medium.url" class="card-img-top img-gif" alt="...">
           </div>
+          <div class="card-body">
+            <p class="card-text">{{ gif.title }}</p>
+          </div>
+          <div class="card-footer text-muted">
+            {{ gif.id }}
+          </div>
+        </div>
       </div>
     </div>
     <div class="row justify-content-md-center">
@@ -54,27 +77,34 @@ import axios from "axios";
 
 export default {
   name: "Gif",
-  data (){
+  data() {
     return {
       apiKey: "Kc80TvwZjsA23Me2w0dz0w985d4JM733",
       limit: 6,
-      rating: "g",
+      rating: "",
       count: 25,
       total_count: 100,
       data: [],
       page: 1,
+      ratingSort: '',
+      url: '',
+      q: '',
+      tag: '',
     }
   },
   methods: {
-    setPage (page){
+    setPage(page) {
       this.page = page
     },
-    changePage (shift){
+    changePage(shift) {
       this.page += shift
     },
-    receiveTrending (){
+    sortRequests() {
+      if (this.url === '/trending') this.receiveTrending()
+    },
+    receiveTrending() {
       return new Promise((resolve, reject) => {
-         axios.get('https://api.giphy.com/v1/gifs/trending', {
+        axios.get( 'https://api.giphy.com/v1/gifs/trending', {
           params: {
             api_key: this.apiKey,
             limit: this.limit,
@@ -95,7 +125,7 @@ export default {
     },
   },
   mounted() {
-    this.receiveTrending()
+    /*this.receiveTrending()*/
   }
 }
 </script>
@@ -105,7 +135,12 @@ export default {
   height: 200px;
   width: 200px;
 }
+
 .card-img {
   align-items: center;
+}
+
+.row-form {
+  padding-bottom: 2rem;
 }
 </style>
