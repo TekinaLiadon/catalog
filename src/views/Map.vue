@@ -1,7 +1,26 @@
 <template>
-  <div id="editor">
-    <textarea :value="input" @input="update"></textarea>
-    <div v-html="compiledMarkdown"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <button type="button" class="btn btn-primary d-flex" @click="edit = true">
+          Редактировать
+        </button>
+      </div>
+    </div>
+    <div class="row-cols-md-1 justify-content-md-center">
+      <div class="col">
+        <div id='editor' v-html="compiledMarkdown"></div>
+      </div>
+      <div class="col" v-if="edit">
+        <textarea :value="input" @input="update"></textarea>
+        <button type="button" class="btn btn-primary d-flex" @click="safeText(input)">
+          Сохранить
+        </button>
+        <button type="button" class="btn btn-primary d-flex" @click="deleteText">
+          Значение по умолчанию
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -12,7 +31,8 @@ export default {
   name: "Map",
   data() {
     return {
-      input: '# hello'
+      input: localStorage.getItem('textMark') || '# hello',
+      edit: false,
     }
   },
   computed: {
@@ -23,7 +43,14 @@ export default {
   methods: {
     update: _.debounce(function(e) {
       this.input = e.target.value;
-    }, 300)
+    }, 300),
+    safeText (textMark){
+      localStorage.setItem('textMark', textMark)
+    },
+    deleteText (){
+      localStorage.removeItem('textMark')
+      this.input = '# hello'
+    }
   }
 }
 </script>
@@ -31,26 +58,24 @@ export default {
 <style  scoped>
 #editor {
   margin: 0;
-  height: 100%;
   font-family: "Helvetica Neue", Arial, sans-serif;
   color: #333;
+  padding-bottom: 1em;
 }
 
 textarea,
-#editor div {
-  display: inline-block;
-  width: 49%;
+#editor {
+  display: flex;
+  width: 99%;
   height: 100%;
   vertical-align: top;
   box-sizing: border-box;
-  padding: 0 20px;
+  border: none;
+  resize: none;
+  outline: none;
 }
 
 textarea {
-  border: none;
-  border-right: 1px solid #ccc;
-  resize: none;
-  outline: none;
   background-color: #f6f6f6;
   font-size: 14px;
   font-family: "Monaco", courier, monospace;

@@ -57,11 +57,12 @@
                id="navbarDropdownProject"
                data-bs-toggle="dropdown"
                aria-expanded="false">
-              Рейтинги
+              Проекты
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownProject" id="menu-project">
               <li>
-                <router-link class="dropdown-item" :to="{name: 'Gif'}" index="gif">Список групп
+                <router-link class="dropdown-item" :to="{name: 'Gif'}" index="gif">
+                  Гифки
                 </router-link>
               </li>
             </ul>
