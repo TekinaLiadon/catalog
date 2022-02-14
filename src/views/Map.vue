@@ -1,24 +1,28 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-2">
-        <button type="button" class="btn btn-primary d-flex" @click="edit = true">
+      <div class="col" style="text-align: end">
+        <button type="button"
+                class="btn btn-primary"
+                @click="edit = true">
           Редактировать
         </button>
       </div>
     </div>
     <div class="row-cols-md-1 justify-content-md-center">
-      <div class="col">
+      <div class="col" style="text-align: start">
         <div id='editor' v-html="compiledMarkdown"></div>
       </div>
       <div class="col" v-if="edit">
         <textarea :value="input" @input="update"></textarea>
-        <button type="button" class="btn btn-primary d-flex" @click="safeText(input)">
-          Сохранить
-        </button>
-        <button type="button" class="btn btn-primary d-flex" @click="deleteText">
-          Значение по умолчанию
-        </button>
+        <div style="text-align: start">
+          <button type="button" class="btn btn-primary btn-mark" @click="safeText(input)">
+            Сохранить
+          </button>
+          <button type="button" class="btn btn-primary btn-mark" @click="deleteText">
+            Значение по умолчанию
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -56,6 +60,9 @@ export default {
 </script>
 
 <style  scoped>
+.btn-mark {
+  margin: 1em 1em 0 0;
+}
 #editor {
   margin: 0;
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -65,7 +72,7 @@ export default {
 
 textarea,
 #editor {
-  display: flex;
+  display: inline-block;
   width: 99%;
   height: 100%;
   vertical-align: top;
@@ -79,7 +86,7 @@ textarea {
   background-color: #f6f6f6;
   font-size: 14px;
   font-family: "Monaco", courier, monospace;
-  padding: 20px;
+  padding: 20px 20px 4rem 20px;
 }
 
 code {
