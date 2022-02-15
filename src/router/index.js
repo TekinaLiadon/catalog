@@ -90,6 +90,11 @@ const routes = [
     },
     component: () => import('../views/project/Gif')
   },
+  {
+    path: '/gif/:id',
+    name: 'UserGif',
+    component: () => import('@/components/gif/UserGif')
+  },
 ]
 
 const router = createRouter({

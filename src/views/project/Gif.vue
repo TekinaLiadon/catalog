@@ -10,11 +10,11 @@
         </select>
       </div>
       <div class="col" v-show="url === '/search' || url === '/trending'">
-          <input type="text"
-                 class="form-control"
-                 placeholder="Число гифок"
-                 v-model="limit"
-          >
+        <input type="text"
+               class="form-control"
+               placeholder="Число гифок"
+               v-model="limit"
+        >
       </div>
       <div class="col" v-show="url === '/search'">
         <input type="text"
@@ -46,28 +46,27 @@
     <div class="row row justify-content-md-center row-cols-1 row-cols-md-4 g-4">
       <div class="col"
            v-for="gif in data"
-           :key="gif.id">
+           :key="gif.id"
+      >
         <div class="card h-100">
           <div class="card-img">
             <img :src="gif.images.downsized_medium.url" class="card-img-top img-gif" alt="...">
           </div>
           <div class="card-body">
-            <p class="card-text">{{ gif.title }}</p>
+            <p class="card-text">Название: {{ gif.title }}</p>
+            <p class="card-text">Пользователь:
+              <a class="stretched-link"
+                 @click="this.$router.push({ name: 'UserGif', params: { id: gif.id } })">
+                {{ gif.username }}
+              </a>
+            </p>
+
           </div>
           <div class="card-footer text-muted">
             {{ gif.id }}
           </div>
         </div>
       </div>
-    </div>
-    <div class="row justify-content-md-center">
-      <Pagination
-          :page="page"
-          :total-pages="total_count"
-          :namePath="'Gif'"
-          @changePage="changePage"
-          @setPage="setPage"
-      />
     </div>
   </div>
 </template>
@@ -83,49 +82,80 @@ export default {
       limit: 6,
       rating: "",
       count: 25,
-      total_count: 100,
+      total_count: 0,
       data: [],
       page: 1,
       ratingSort: '',
       url: '',
       q: '',
       tag: '',
+      mapRequests: new Map([
+        ['/search', {
+          q: this.q,
+          limit: this.limit,
+          offset: 0,
+          rating: this.rating,
+          lang: "en",
+        }],
+        ['/trending', {
+          limit: this.limit,
+          rating: this.rating,
+        }],
+        ['/random', {
+          tag: this.tag,
+          rating: this.rating,
+        }]
+      ]),
     }
   },
   methods: {
-    setPage(page) {
-      this.page = page
-    },
-    changePage(shift) {
-      this.page += shift
-    },
     sortRequests() {
-      if (this.url === '/trending') this.receiveTrending()
+      // Повысить читаемость
+      const instance = axios.create({
+        baseURL: 'https://api.giphy.com/v1/gifs/',
+        timeout: 10000,
+        params: {
+          api_key: this.apiKey,
+        }
+      })
+
+      if (this.$route.query.endpoint) {
+        this.url = this.$route.query.endpoint
+        delete this.$route.query.endpoint
+        return this.getRequests(instance, this.$route.query)
+      }
+      if(this.url) {
+        this.$router.push({ query: Object.assign({endpoint: this.url} , this.mapRequests.get(this.url) ) })
+        return this.getRequests(instance, this.mapRequests.get(this.url))
+      }
     },
-    receiveTrending() {
+    getRequests(instance, params) {
       return new Promise((resolve, reject) => {
-        axios.get( 'https://api.giphy.com/v1/gifs/trending', {
-          params: {
-            api_key: this.apiKey,
-            limit: this.limit,
-            rating: this.rating,
-          }
+        instance.get(this.url, {
+          params: params
         })
             .then(resp => {
-              this.count = resp.data.pagination.count
-              this.total_count = resp.data.pagination.total_count
-              this.data = resp.data.data
+              // Придумать лаконичную обработку исключения
+              if (this.url !== '/random') {
+                this.count = resp.data.pagination.count
+                this.total_count = resp.data.pagination.total_count
+                this.data = resp.data.data
+              } else {
+                this.data.push(resp.data.data)
+              }
               resolve(resp)
             })
             .catch(err => {
-              console.log('error')
+              console.log('err')
               reject(err)
             })
       })
     },
   },
   mounted() {
-    /*this.receiveTrending()*/
+    /*this.receiveTrending()
+    Ограничение в количестве запросов не позволяет сразу грузить*/
+    this.sortRequests()
   }
 }
 </script>
@@ -137,7 +167,7 @@ export default {
 }
 
 .card-img {
-  align-items: center;
+  text-align: center;
 }
 
 .row-form {
