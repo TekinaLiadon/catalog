@@ -1,6 +1,15 @@
 <template>
   <div class="container">
     <div class="row justify-content-md-center">
+      <h2>Постепенная анимация</h2>
+      <LineChart/>
+    </div>
+    <div class="row justify-content-md-center">
+      <h2>Диаграмма</h2>
+      <TestChart :data="dataChart"/>
+    </div>
+    <div class="row justify-content-md-center">
+      <h2>Загрузка постов</h2>
       <div class="col-12">
         <div class="row justify-content-md-center">
           <div class="col-6">
@@ -70,66 +79,78 @@ import PostList from "@/components/home/PostList";
 import axios from "axios";
 import PostForm from "../components/home/PostForm";
 import testMixin from "../components/mixins/testMixin";
+import TestChart from "../components/home/TestChart";
+import LineChart from "../components/home/LineChart.vue";
 
-    export default {
-      name: "Test",
-      components: {
-        PostList,
-        PostForm,
+export default {
+  name: "Test",
+  components: {
+    LineChart,
+    TestChart,
+    PostList,
+    PostForm,
+  },
+  data() {
+    return {
+      cards: [],
+      newCards: [],
+      selectedSort: "",
+      post: {
+        title: "",
+        body: "",
       },
-      data() {
-        return {
-          cards: [],
-          newCards: [],
-          selectedSort: "",
-          post: {
-            title: "",
-            body: "",
-          },
-          page: 1,
-          limit: 10,
-          totalPages: 0,
-        }
-      },
-      methods: {
-        createPost(post) {
-          this.cards.push(post);
-        },
-        removePost(post) {
-          this.cards = this.cards.filter(p => p.id !== post.id)
-        },
-        sortPosts(newArr) {
-          this.cards = newArr;
-        },
-        changePage(pageNumber, shift = 0) {
-          this.page = pageNumber + shift
-        },
-        async fetchPosts() {
-          try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-                  params: {
-                    _page: this.page,
-                    _limit: this.limit,
-                  }
-                }
-            );
-            this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-            this.cards = response.data
-          } catch (e) {
-            console.log('Error');
-          }
-        },
-      },
-      mounted() {
-        this.fetchPosts();
-      },
-      watch: {
-        page() {
-          this.fetchPosts()
-        }
-      },
-      mixins: [testMixin]
+      page: 1,
+      limit: 10,
+      totalPages: 0,
+      dataChart: [
+        {label: 'Элла', value: 30, backgroundColor: '#77CEFF',},
+        {label: 'Мардук', value: 40, backgroundColor: '#0079AF',},
+        {label: 'Иштра', value: 60, backgroundColor: '#123E6B',},
+        {label: 'Элиаль', value: 70, backgroundColor: '#97B0C4',},
+        {label: 'Третий', value: 10, backgroundColor: '#A5C8ED',},
+      ],
     }
+  },
+  methods: {
+    createPost(post) {
+      this.cards.push(post);
+    },
+    removePost(post) {
+      this.cards = this.cards.filter(p => p.id !== post.id)
+    },
+    sortPosts(newArr) {
+      this.cards = newArr;
+    },
+    changePage(pageNumber, shift = 0) {
+      this.page = pageNumber + shift
+    },
+    async fetchPosts() {
+      try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+              params: {
+                _page: this.page,
+                _limit: this.limit,
+              }
+            }
+        );
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
+        this.cards = response.data
+      } catch (e) {
+        console.log('Error');
+      }
+    },
+  },
+  mounted() {
+    this.fetchPosts();
+    console.log(this.dataChart)
+  },
+  watch: {
+    page() {
+      this.fetchPosts()
+    }
+  },
+  mixins: [testMixin]
+}
 </script>
 
 <style scoped>

@@ -33,6 +33,7 @@ const routes = [
     path: '/create-group',
     name: 'CreateGroup',
     meta: {
+      requiresAuth: true,
       title: 'Создание группы'
     },
     component: () => import('../views/group-directory/CreateGroup.vue')
@@ -40,6 +41,10 @@ const routes = [
   {
     path: '/player-directory',
     name: 'PlayerDirectory',
+    meta: {
+      requiresAuth: true,
+      title: 'Каталог игроков'
+    },
     component: () => import('../views/group-directory/PlayerDirectory.vue')
   },
   {
@@ -63,7 +68,6 @@ const routes = [
     path: '/test',
     name: 'Test',
     meta: {
-      requiresAuth: true,
       title: 'Тест'
     },
     component: () => import('../views/Test')
@@ -89,6 +93,11 @@ const routes = [
       title: 'Гифки'
     },
     component: () => import('../views/project/Gif')
+  },
+  {
+    path: '/gif/:id',
+    name: 'UserGif',
+    component: () => import('@/components/gif/UserGif')
   },
 ]
 
