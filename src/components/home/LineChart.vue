@@ -4,14 +4,14 @@
 
 <script>
 import {Chart, registerables} from "chart.js";
-import lineChart from "./lineChart";
+import DataChart from "./DataChart";
 
 Chart.register(...registerables);
 export default {
   name: "LineChart",
   data(){
     return {
-      config: lineChart,
+      config: DataChart,
     }
   },
   mounted() {

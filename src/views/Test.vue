@@ -80,7 +80,7 @@ import axios from "axios";
 import PostForm from "../components/home/PostForm";
 import testMixin from "../components/mixins/testMixin";
 import TestChart from "../components/home/TestChart";
-import LineChart from "../components/home/LineChart";
+import LineChart from "../components/home/LineChart.vue";
 
 export default {
   name: "Test",
