@@ -31,6 +31,7 @@
 <script>
 import _ from 'lodash'
 import { marked } from 'marked'
+
 export default {
   name: "Map",
   data() {

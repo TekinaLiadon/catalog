@@ -1,5 +1,12 @@
 <template>
   <div class="container">
+    <div class="row" v-show="status === 'loading'">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+          <span class="visually-hidden">Загрузка...</span>
+        </div>
+      </div>
+    </div>
     <div class="row row-form">
       <div class="col">
         <select class="form-select" v-model="url">
@@ -43,7 +50,9 @@
         <button type="submit" class="btn btn-primary" @click="sortRequests">Найти</button>
       </div>
     </div>
-    <div class="row row justify-content-md-center row-cols-1 row-cols-md-4 g-4">
+    <div class="row row justify-content-md-center row-cols-1 row-cols-md-4 g-4"
+         v-show="status === 'ready'"
+    >
       <div class="col"
            v-for="gif in data"
            :key="gif.id"
@@ -78,14 +87,12 @@ export default {
   name: "Gif",
   data() {
     return {
+      status: '',
       apiKey: "Kc80TvwZjsA23Me2w0dz0w985d4JM733",
       limit: 6,
       rating: "",
-      count: 25,
-      total_count: 0,
       data: [],
       page: 1,
-      ratingSort: '',
       url: '',
       q: '',
       tag: '',
@@ -124,12 +131,13 @@ export default {
         delete this.$route.query.endpoint
         return this.getRequests(instance, this.$route.query)
       }
-      if(this.url) {
-        this.$router.push({ query: Object.assign({endpoint: this.url} , this.mapRequests.get(this.url) ) })
+      if (this.url) {
+        this.$router.push({query: Object.assign({endpoint: this.url}, this.mapRequests.get(this.url))})
         return this.getRequests(instance, this.mapRequests.get(this.url))
       }
     },
     getRequests(instance, params) {
+      this.status = 'loading'
       return new Promise((resolve, reject) => {
         instance.get(this.url, {
           params: params
@@ -137,8 +145,6 @@ export default {
             .then(resp => {
               // Придумать лаконичную обработку исключения
               if (this.url !== '/random') {
-                this.count = resp.data.pagination.count
-                this.total_count = resp.data.pagination.total_count
                 this.data = resp.data.data
               } else {
                 this.data.push(resp.data.data)
@@ -149,6 +155,7 @@ export default {
               console.log('err')
               reject(err)
             })
+            .finally(() => this.status = 'ready')
       })
     },
   },

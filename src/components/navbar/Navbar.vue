@@ -69,8 +69,6 @@
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Поиск</button>
             <router-link class="nav-link btn btn-outline-success"
                          :to="{name: 'Login'}"
                          index="login"
