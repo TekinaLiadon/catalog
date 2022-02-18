@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="row justify-content-md-center">
-      <h2>Диаграмма</h2>
-      <TestChart :data="dataChart"/>
-    </div>
-    <div class="row justify-content-md-center">
       <h2>Постепенная анимация</h2>
       <LineChart/>
+    </div>
+    <div class="row justify-content-md-center">
+      <h2>Диаграмма</h2>
+      <TestChart :data="dataChart"/>
     </div>
     <div class="row justify-content-md-center">
       <h2>Загрузка постов</h2>
