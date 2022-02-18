@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21aaee"],{bd0f:function(n,e,r){"use strict";function a(n,e,r,a,c,o){return" Списки "}r.r(e);var c={name:"PlayerDirectory"},o=r("6b0d"),t=r.n(o);const d=t()(c,[["render",a]]);e["default"]=d}}]);
+//# sourceMappingURL=chunk-2d21aaee.99cc5a80.js.map
