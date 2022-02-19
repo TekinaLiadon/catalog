@@ -1,6 +1,6 @@
 # catalog
 Демо версия
-https://tekinaliadon.github.io/catalogWeb/
+https://tekinaliadon.github.io/catalog/#/home
 
 ## Project setup
 ```
